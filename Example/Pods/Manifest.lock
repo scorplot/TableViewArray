@@ -1,0 +1,22 @@
+PODS:
+  - CircleReferenceCheck (0.0.1)
+  - MutableArrayListener (0.1.0):
+    - CircleReferenceCheck
+  - TableViewArray (0.1.0):
+    - MutableArrayListener
+
+DEPENDENCIES:
+  - TableViewArray (from `../`)
+
+EXTERNAL SOURCES:
+  TableViewArray:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CircleReferenceCheck: 5ef0dbaff301108a523f845bf81dfa9a12a83024
+  MutableArrayListener: 80566460c0f35ffe89d76a90ebb33adf7f413182
+  TableViewArray: e9dc314569e27cc5c5d1c4d216846c4e16b8b9cb
+
+PODFILE CHECKSUM: 67ac081f9d3067e1088c069f1ef3aa59c17170c6
+
+COCOAPODS: 1.4.0.rc.1
