@@ -44,6 +44,18 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
     }
 }
 
+static void* keyArrayIndex;
+static void setArrayIndex(NSArray* arr, NSInteger index) {
+    objc_setAssociatedObject(arr, &keyArrayIndex, @(index), OBJC_ASSOCIATION_RETAIN);
+}
+static NSInteger getArrayIndex(NSArray* arr) {
+    NSNumber* number = objc_getAssociatedObject(arr, &keyArrayIndex);
+    if (number) {
+        return [number integerValue];
+    }
+    return NSNotFound;
+}
+
 
 @implementation TableViewProtocolListener
 +(void)load {
@@ -220,40 +232,40 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     return self.listener.willSelectRowAtIndexPath(tableView, indexPath,object);
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     return  self.listener.willDeselectRowAtIndexPath(tableView, indexPath,object);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     self.listener.didSelectRowAtIndexPath(tableView, indexPath,object);
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     self.listener.didDeselectRowAtIndexPath(tableView, indexPath,object);
 }
@@ -271,12 +283,11 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     self.listener.willDisplayCellforRowAtIndexPath(tableView, cell, indexPath,object);
 }
@@ -351,10 +362,10 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     self.listener.didEndDisplayingCellForRowAtIndexPath(tableView,cell,indexPath,object);
 }
@@ -468,18 +479,18 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
 #pragma mark  require
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        return self.listener.subArray(_dataSource, section).count;
+    } else {
         return _dataSource.count ;
-    }else{
-        return [_dataSource[section] count];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     id object = nil;
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
+    if (self.listener.subArray) {
+        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    } else {
         object = _dataSource[indexPath.row];
-    }else{
-        object = _dataSource[indexPath.section][indexPath.row];
     }
     return self.listener.cellForRowAtIndexPath(tableView,indexPath,object);
 }
@@ -623,10 +634,10 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
 
 #pragma mark   optional
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (_listener.tableViewStyle == UITableViewStylePlain) {
-        return 1;
-    }else{
+    if (_listener.subArray) {
         return _dataSource.count;
+    } else {
+        return 1;
     }
 }
 
@@ -752,27 +763,37 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
     
     if ([dataSource isKindOfClass:[NSMutableArray class]]) {
         [self addObserverForDataSource:(NSMutableArray*)self.dataSource];
-        for (NSMutableArray * subArray in self.dataSource) {
-            if ([subArray isKindOfClass:[NSMutableArray class]]) {
-                [self addObserverForDataSource:subArray];
+        if (_listener.subArray) {
+            for (NSInteger i = 0; i < self.dataSource.count; i++) {
+                NSArray* subArray = _listener.subArray(_dataSource, i);
+                if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                    [self addObserverForDataSource:(NSMutableArray*)subArray];
+                    setArrayIndex(subArray, i);
+                }
             }
         }
     }
 }
 
 -(void)addObserverForDataSource:(NSMutableArray * )array{
-    BOOL isGroup = _listener.tableViewStyle == UITableViewStyleGrouped;
+    BOOL isGroup = _listener.subArray != nil;
     typeof(self)__weak weakself = self;
+    typeof(_listener.subArray)__weak weakSubArray = _listener.subArray;
+
     MutableArrayListener *observer = [[MutableArrayListener alloc]init];
     observer.didAddObjects = ^(NSMutableArray *array, NSArray *objects, NSIndexSet *indexes) {
-//        [weakself.tableView beginUpdates];
         if (array==weakself.dataSource) {
             if (isGroup) {
                 [weakself.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationNone];
-                for (NSMutableArray * subArry in objects) {
-                    if ([subArry isKindOfClass:[NSMutableArray class]]) {
-                        [weakself addObserverForDataSource:subArry];
-                    }
+                typeof(_listener.subArray) strongSubArray = weakSubArray;
+                if (strongSubArray) {
+                    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+                        NSArray* subArray = strongSubArray(array, idx);
+                        if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                            [weakself addObserverForDataSource:(NSMutableArray*)subArray];
+                            setArrayIndex(subArray, idx);
+                        }
+                    }];
                 }
             }else{
                 NSMutableArray * indexPaths = [NSMutableArray array];
@@ -782,21 +803,25 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
                 [weakself.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
             }
         }else{
-            NSInteger section = [weakself.dataSource indexOfObjectIdenticalTo:array];
+            NSInteger section = getArrayIndex(array);
             NSMutableArray * indexPaths = [NSMutableArray array];
             [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
                 [indexPaths addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
             }];
             [weakself.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-            
         }
-//        [weakself.tableView endUpdates];
     };
     observer.didDeleteObjects = ^(NSMutableArray *array, NSArray *objects, NSIndexSet *indexes) {
 //        [weakself.tableView beginUpdates];
         if (array==weakself.dataSource) {
             if (isGroup) {
                 [weakself.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationNone];
+                for (NSInteger i = 0; i < array.count; i++) {
+                    NSArray* subArray = weakSubArray(array, i);
+                    if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                        setArrayIndex(subArray, i);
+                    }
+                }
             }else{
                 NSMutableArray * indexPaths = [NSMutableArray array];
                 [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
@@ -805,7 +830,7 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
                 [weakself.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
             }
         }else{
-            NSInteger section = [weakself.dataSource indexOfObjectIdenticalTo:array];
+            NSInteger section = getArrayIndex(array);
             NSMutableArray * indexPaths = [NSMutableArray array];
             [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
                 [indexPaths addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
@@ -820,12 +845,20 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
             if (isGroup) {
                 [weakself.tableView moveSection:index1 toSection:index2];
                 [weakself.tableView moveSection:index2 toSection:index1];
+                NSArray* subArray = weakSubArray(array, index1);
+                if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                    setArrayIndex(subArray, index1);
+                }
+                subArray = weakSubArray(array, index2);
+                if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                    setArrayIndex(subArray, index2);
+                }
             }else{
                 [weakself.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index1 inSection:0] toIndexPath:[NSIndexPath indexPathForRow:index2 inSection:0]];
                 [weakself.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index2 inSection:0] toIndexPath:[NSIndexPath indexPathForRow:index1 inSection:0]];
             }
         }else{
-            NSInteger section = [weakself.dataSource indexOfObjectIdenticalTo:array];
+            NSInteger section = getArrayIndex(array);
             [weakself.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index1 inSection:section] toIndexPath:[NSIndexPath indexPathForRow:index2 inSection:section]];
             [weakself.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index2 inSection:section ] toIndexPath:[NSIndexPath indexPathForRow:index1 inSection:section]];
         }
@@ -835,15 +868,19 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
         if (array==weakself.dataSource) {
             if (isGroup) {
                 [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationNone];
-                if ([withObject isKindOfClass:[NSMutableArray class]]) {
-                    [weakself addObserverForDataSource:withObject];
+                typeof(_listener.subArray) strongSubArray = weakSubArray;
+                if (strongSubArray) {
+                    NSArray* subArray = strongSubArray(array, index);
+                    if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                        [weakself addObserverForDataSource:(NSMutableArray*)subArray];
+                        setArrayIndex(subArray, index);
+                    }
                 }
-                
             }else{
                 [weakself.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
             }
         }else{
-            NSInteger section = [weakself.dataSource indexOfObjectIdenticalTo:array];
+            NSInteger section = getArrayIndex(array);
             [weakself.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:section]] withRowAnimation:UITableViewRowAnimationNone];
         }
     };
@@ -852,13 +889,18 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
             [weakself.tableView reloadData];
             [weakself removeObserver];
             [weakself addObserverForDataSource:(NSMutableArray *)weakself.dataSource];
-            for (NSMutableArray * subarray in weakself.dataSource) {
-                if ([subarray isKindOfClass:[NSMutableArray class]]) {
-                    [weakself addObserverForDataSource:subarray];
+            typeof(_listener.subArray) strongSubArray = weakSubArray;
+            if (strongSubArray) {
+                for (NSInteger i = 0; i < weakself.dataSource.count; i++) {
+                    NSArray* subArray = strongSubArray(weakself.dataSource, i);
+                    if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                        [weakself addObserverForDataSource:(NSMutableArray*)subArray];
+                        setArrayIndex(subArray, i);
+                    }
                 }
             }
-        }else{
-            NSInteger section = [weakself.dataSource indexOfObjectIdenticalTo:array];
+        } else {
+            NSInteger section = getArrayIndex(array);
             [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
         }
     };
@@ -869,20 +911,20 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
 }
 
 -(void)removeObserver{
-    if ([_dataSource isKindOfClass:[NSMutableArray class]]) {
-        for (MutableArrayListener * obs in self.observerArray) {
-            [(NSMutableArray*)self.dataSource removeListener:obs];
-            for (NSMutableArray * subArray  in _dataSource) {
+    for (MutableArrayListener * obs in self.observerArray) {
+        [(NSMutableArray*)self.dataSource removeListener:obs];
+        if (_listener.subArray) {
+            for (NSInteger i = 0; i < _dataSource.count; i++) {
+                NSArray* subArray = _listener.subArray(_dataSource, i);
                 if ([subArray isKindOfClass:[NSMutableArray class]]) {
-                    
                     for (MutableArrayListener * obs in self.observerArray) {
                         [(NSMutableArray*)subArray removeListener:obs];
                     }
                 }
             }
         }
-        [self.observerArray removeAllObjects];
     }
+    [self.observerArray removeAllObjects];
 }
 
 @end

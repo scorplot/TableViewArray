@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TableViewArray'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A usefull library make UITableView listener a array'
 
 # This description is used to generate tags and improve search results.

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 @class TableViewArray;
 
+#pragma mark  - the picker of array
+typedef NSArray* (^subArray)(NSArray* all, NSInteger index);
+
 void TableViewConnectArray(UITableView * _Nonnull tableview ,NSArray<NSObject*>* _Nonnull dataSource,TableViewArray * _Nonnull listener);
 
 #pragma mark  - dataSource
@@ -106,6 +109,8 @@ typedef void(^prefetchRowsBlock)(UITableView* _Nullable tableView,NSArray<NSInde
 typedef void(^cancelPrefetchingForRowsBlock)(UITableView* _Nullable tableView,NSArray<NSIndexPath*>* _Nullable indexPaths);
 
 @interface TableViewArray : NSObject
+@property(nonatomic,copy,nullable) subArray subArray;
+
 #pragma mark  - dataSource
 @property(nonatomic,copy,nonnull) cellforRowBlock   cellForRowAtIndexPath;
 @property(nonatomic,copy,nonnull) sectionIndexTitlesBlock  sectionIndexTitlesForTableView;
@@ -185,10 +190,6 @@ typedef void(^cancelPrefetchingForRowsBlock)(UITableView* _Nullable tableView,NS
 #pragma mark - prefetching 
 @property(nonatomic,copy,nonnull) prefetchRowsBlock  prefetchRowsAtIndexPaths NS_AVAILABLE_IOS(10_0);
 @property(nonatomic,copy,nonnull) cancelPrefetchingForRowsBlock  cancelPrefetchingForRowsAtIndexPaths NS_AVAILABLE_IOS(10_0);
-
-    @property(nonatomic,assign)UITableViewStyle tableViewStyle;
-
-
 
 #pragma mark  - UIScrollViewDelegate
 @property(nonatomic,copy,nonnull) void (^scrollViewDidScroll)(UIScrollView * _Nonnull scrollView);
