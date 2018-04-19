@@ -230,126 +230,106 @@ static NSInteger getArrayIndex(NSArray* arr) {
     return [super respondsToSelector:aSelector];
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(id)getObject:(NSIndexPath*)indexPath {
     id object = nil;
     if (self.listener.subArray) {
         object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
     } else {
         object = _dataSource[indexPath.row];
     }
-    return self.listener.willSelectRowAtIndexPath(tableView, indexPath,object);
+    return object;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.listener.willSelectRowAtIndexPath(tableView, indexPath, [self getObject:indexPath]);
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
-    } else {
-        object = _dataSource[indexPath.row];
-    }
-    return  self.listener.willDeselectRowAtIndexPath(tableView, indexPath,object);
+    return  self.listener.willDeselectRowAtIndexPath(tableView, indexPath, [self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
-    } else {
-        object = _dataSource[indexPath.row];
-    }
-    self.listener.didSelectRowAtIndexPath(tableView, indexPath,object);
+    self.listener.didSelectRowAtIndexPath(tableView, indexPath, [self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
-    } else {
-        object = _dataSource[indexPath.row];
-    }
-    self.listener.didDeselectRowAtIndexPath(tableView, indexPath,object);
+    self.listener.didDeselectRowAtIndexPath(tableView, indexPath, [self getObject:indexPath]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.heightForRowAtIndexPath(tableView,indexPath);
+    return self.listener.heightForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.estimatedHeightForRowAtIndexPath(tableView,indexPath);
+    return self.listener.estimatedHeightForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.indentationLevelForRowAtIndexPath(tableView,indexPath);
+    return self.listener.indentationLevelForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
-    } else {
-        object = _dataSource[indexPath.row];
-    }
-    self.listener.willDisplayCellforRowAtIndexPath(tableView, cell, indexPath,object);
+    self.listener.willDisplayCellforRowAtIndexPath(tableView, cell, indexPath,[self getObject:indexPath]);
 }
 
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.editActionsForRowAtIndexPath(tableView,indexPath);
+    return self.listener.editActionsForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    self.listener.accessoryButtonTappedForRowWithIndexPath(tableView, indexPath);
+    self.listener.accessoryButtonTappedForRowWithIndexPath(tableView, indexPath,[self getObject:indexPath]);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return  self.listener.viewForHeaderInSection(tableView,section);
+    return  self.listener.viewForHeaderInSection(tableView,section,_dataSource[section]);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return self.listener.viewForFooterInSection(tableView,section);
+    return self.listener.viewForFooterInSection(tableView,section,_dataSource[section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return self.listener.heightForHeaderInSection(tableView,section);
+    return self.listener.heightForHeaderInSection(tableView,section,_dataSource[section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return self.listener.heightForFooterInSection(tableView,section);
+    return self.listener.heightForFooterInSection(tableView,section,_dataSource[section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
-    return self.listener.estimatedHeightForHeaderInSection(tableView,section);
+    return self.listener.estimatedHeightForHeaderInSection(tableView,section,_dataSource[section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
-    return self.listener.estimatedHeightForFooterInSection(tableView,section);
+    return self.listener.estimatedHeightForFooterInSection(tableView,section,_dataSource[section]);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.willDisplayHeaderViewForSection(tableView, view, section);
+    self.listener.willDisplayHeaderViewForSection(tableView, view, section,_dataSource[section]);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.willDisplayFooterViewForSection(tableView, view, section);
+    self.listener.willDisplayFooterViewForSection(tableView, view, section,_dataSource[section]);
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.listener.willBeginEditingRowAtIndexPath(tableView,indexPath);
+    self.listener.willBeginEditingRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.listener.didEndEditingRowAtIndexPath(tableView,indexPath);
+    self.listener.didEndEditingRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.editingStyleForRowAtIndexPath(tableView,indexPath);
+    return self.listener.editingStyleForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.titleForDeleteConfirmationButtonForRowAtIndexPath(tableView,indexPath);
+    return self.listener.titleForDeleteConfirmationButtonForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.shouldIndentWhileEditingRowAtIndexPath(tableView,indexPath);
+    return self.listener.shouldIndentWhileEditingRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 #pragma mark - Reordering Table Rows
@@ -361,27 +341,21 @@ static NSInteger getArrayIndex(NSArray* arr) {
 #pragma mark - Tacking the Removal of Views
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
-    } else {
-        object = _dataSource[indexPath.row];
-    }
-    self.listener.didEndDisplayingCellForRowAtIndexPath(tableView,cell,indexPath,object);
+    self.listener.didEndDisplayingCellForRowAtIndexPath(tableView,cell,indexPath,[self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.didEndDisplayingHeaderViewForSection(tableView,view,section);
+    self.listener.didEndDisplayingHeaderViewForSection(tableView,view,section,_dataSource[section]);
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.didEndDisplayingFooterViewForSection(tableView, view, section);
+    self.listener.didEndDisplayingFooterViewForSection(tableView, view, section,_dataSource[section]);
 }
 
 #pragma mark - Copying and Pasting Row content
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.shouldShowMenuForRowAtIndexPath(tableView,indexPath);
+    return self.listener.shouldShowMenuForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -395,21 +369,21 @@ static NSInteger getArrayIndex(NSArray* arr) {
 #pragma mark - Managing Table View Highlighting
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.shouldHighlightRowAtIndexPath(tableView,indexPath);
+    return self.listener.shouldHighlightRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.listener.didHighlightRowAtIndexPath(tableView, indexPath);
+    self.listener.didHighlightRowAtIndexPath(tableView, indexPath,[self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.listener.didUnhighlightRowAtIndexPath(tableView,indexPath);
+    self.listener.didUnhighlightRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 #pragma mark  - Managing TableView Focus
 
 - (BOOL)tableView:(UITableView *)tableView canFocusRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.canFocusRowAtIndexPath(tableView,indexPath);
+    return self.listener.canFocusRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldUpdateFocusInContext:(UITableViewFocusUpdateContext *)context  API_AVAILABLE(ios(9.0)){
@@ -431,27 +405,27 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return self.listener.sectionForSectionIndexTitleAtIndex(tableView,title,index);
+    return self.listener.sectionForSectionIndexTitleAtIndex(tableView,title,index,_dataSource[index]);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.listener.titleForHeaderInSection(tableView,section);
+    return self.listener.titleForHeaderInSection(tableView,section,_dataSource[section]);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return self.listener.titleForFooterInSection(tableView,section);
+    return self.listener.titleForFooterInSection(tableView,section,_dataSource[section]);
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.listener.commitEditingStyleForRowAtIndexPath(tableView, editingStyle, indexPath);
+    self.listener.commitEditingStyleForRowAtIndexPath(tableView, editingStyle, indexPath, [self getObject:indexPath]);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.canEditRowAtIndexPath(tableView,indexPath);
+    return self.listener.canEditRowAtIndexPath(tableView,indexPath, [self getObject:indexPath]);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.listener.canMoveRowAtIndexPath(tableView,indexPath);
+    return self.listener.canMoveRowAtIndexPath(tableView,indexPath, [self getObject:indexPath]);
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
@@ -486,13 +460,7 @@ static NSInteger getArrayIndex(NSArray* arr) {
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
-    } else {
-        object = _dataSource[indexPath.row];
-    }
-    return self.listener.cellForRowAtIndexPath(tableView,indexPath,object);
+    return self.listener.cellForRowAtIndexPath(tableView,indexPath,[self getObject:indexPath]);
 }
 #pragma mark - UIScrollView Delegate
 // any offset changes
