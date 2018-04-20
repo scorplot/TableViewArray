@@ -239,6 +239,15 @@ static NSInteger getArrayIndex(NSArray* arr) {
     }
     return object;
 }
+-(id)getSection:(NSUInteger)section {
+    id object = nil;
+    if (self.listener.subArray) {
+        object = _dataSource[section];
+    } else {
+        object = _dataSource;
+    }
+    return object;
+}
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.listener.willSelectRowAtIndexPath(tableView, indexPath, [self getObject:indexPath]);
@@ -281,35 +290,35 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return  self.listener.viewForHeaderInSection(tableView,section,_dataSource[section]);
+    return  self.listener.viewForHeaderInSection(tableView,section,getSection(section));
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return self.listener.viewForFooterInSection(tableView,section,_dataSource[section]);
+    return self.listener.viewForFooterInSection(tableView,section,getSection(section));
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return self.listener.heightForHeaderInSection(tableView,section,_dataSource[section]);
+    return self.listener.heightForHeaderInSection(tableView,section,getSection(section));
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return self.listener.heightForFooterInSection(tableView,section,_dataSource[section]);
+    return self.listener.heightForFooterInSection(tableView,section,getSection(section));
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
-    return self.listener.estimatedHeightForHeaderInSection(tableView,section,_dataSource[section]);
+    return self.listener.estimatedHeightForHeaderInSection(tableView,section,getSection(section));
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
-    return self.listener.estimatedHeightForFooterInSection(tableView,section,_dataSource[section]);
+    return self.listener.estimatedHeightForFooterInSection(tableView,section,getSection(section));
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.willDisplayHeaderViewForSection(tableView, view, section,_dataSource[section]);
+    self.listener.willDisplayHeaderViewForSection(tableView, view, section,getSection(section));
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.willDisplayFooterViewForSection(tableView, view, section,_dataSource[section]);
+    self.listener.willDisplayFooterViewForSection(tableView, view, section,getSection(section));
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -345,11 +354,11 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.didEndDisplayingHeaderViewForSection(tableView,view,section,_dataSource[section]);
+    self.listener.didEndDisplayingHeaderViewForSection(tableView,view,section,getSection(section));
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.didEndDisplayingFooterViewForSection(tableView, view, section,_dataSource[section]);
+    self.listener.didEndDisplayingFooterViewForSection(tableView, view, section,getSection(section));
 }
 
 #pragma mark - Copying and Pasting Row content
@@ -405,15 +414,15 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return self.listener.sectionForSectionIndexTitleAtIndex(tableView,title,index,_dataSource[index]);
+    return self.listener.sectionForSectionIndexTitleAtIndex(tableView,title,index,getSection(index));
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.listener.titleForHeaderInSection(tableView,section,_dataSource[section]);
+    return self.listener.titleForHeaderInSection(tableView,section,getSection(section));
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return self.listener.titleForFooterInSection(tableView,section,_dataSource[section]);
+    return self.listener.titleForFooterInSection(tableView,section,getSection(section));
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
