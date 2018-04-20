@@ -290,35 +290,35 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return  self.listener.viewForHeaderInSection(tableView,section,getSection(section));
+    return  self.listener.viewForHeaderInSection(tableView,section,[self getSection:section]);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return self.listener.viewForFooterInSection(tableView,section,getSection(section));
+    return self.listener.viewForFooterInSection(tableView,section,[self getSection:section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return self.listener.heightForHeaderInSection(tableView,section,getSection(section));
+    return self.listener.heightForHeaderInSection(tableView,section,[self getSection:section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return self.listener.heightForFooterInSection(tableView,section,getSection(section));
+    return self.listener.heightForFooterInSection(tableView,section,[self getSection:section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
-    return self.listener.estimatedHeightForHeaderInSection(tableView,section,getSection(section));
+    return self.listener.estimatedHeightForHeaderInSection(tableView,section,[self getSection:section]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
-    return self.listener.estimatedHeightForFooterInSection(tableView,section,getSection(section));
+    return self.listener.estimatedHeightForFooterInSection(tableView,section,[self getSection:section]);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.willDisplayHeaderViewForSection(tableView, view, section,getSection(section));
+    self.listener.willDisplayHeaderViewForSection(tableView, view, section,[self getSection:section]);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.willDisplayFooterViewForSection(tableView, view, section,getSection(section));
+    self.listener.willDisplayFooterViewForSection(tableView, view, section,[self getSection:section]);
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -354,11 +354,11 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.didEndDisplayingHeaderViewForSection(tableView,view,section,getSection(section));
+    self.listener.didEndDisplayingHeaderViewForSection(tableView,view,section,[self getSection:section]);
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section {
-    self.listener.didEndDisplayingFooterViewForSection(tableView, view, section,getSection(section));
+    self.listener.didEndDisplayingFooterViewForSection(tableView, view, section,[self getSection:section]);
 }
 
 #pragma mark - Copying and Pasting Row content
@@ -414,15 +414,15 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return self.listener.sectionForSectionIndexTitleAtIndex(tableView,title,index,getSection(index));
+    return self.listener.sectionForSectionIndexTitleAtIndex(tableView,title,index,[self getSection:index]);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.listener.titleForHeaderInSection(tableView,section,getSection(section));
+    return self.listener.titleForHeaderInSection(tableView,section,[self getSection:section]);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return self.listener.titleForFooterInSection(tableView,section,getSection(section));
+    return self.listener.titleForFooterInSection(tableView,section,[self getSection:section]);
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
