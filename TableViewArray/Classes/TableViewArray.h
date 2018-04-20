@@ -12,7 +12,7 @@
 #pragma mark  - the picker of array
 typedef NSArray* (^subArray)(NSArray* all, NSInteger index);
 
-void TableViewConnectArray(UITableView * _Nonnull tableview ,NSArray<NSObject*>* _Nonnull dataSource,TableViewArray * _Nonnull listener);
+void TableViewConnectArray(UITableView * _Nonnull tableview ,NSArray<NSObject*>* _Nullable dataSource,TableViewArray * _Nonnull listener);
 
 #pragma mark  - dataSource
 typedef NSInteger (^numberOfSectionsBlock)(UITableView *tableView);

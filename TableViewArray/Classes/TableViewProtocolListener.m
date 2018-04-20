@@ -845,8 +845,6 @@ static NSInteger getArrayIndex(NSArray* arr) {
 //        [weakself.tableView beginUpdates];
         if (array==weakself.dataSource) {
             if (isGroup) {
-                [weakself.tableView moveSection:index1 toSection:index2];
-                [weakself.tableView moveSection:index2 toSection:index1];
                 NSArray* subArray = weakSubArray(array, index1);
                 if ([subArray isKindOfClass:[NSMutableArray class]]) {
                     setArrayIndex(subArray, index1);
@@ -855,6 +853,8 @@ static NSInteger getArrayIndex(NSArray* arr) {
                 if ([subArray isKindOfClass:[NSMutableArray class]]) {
                     setArrayIndex(subArray, index2);
                 }
+                [weakself.tableView moveSection:index1 toSection:index2];
+                [weakself.tableView moveSection:index2 toSection:index1];
             }else{
                 [weakself.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index1 inSection:0] toIndexPath:[NSIndexPath indexPathForRow:index2 inSection:0]];
                 [weakself.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:index2 inSection:0] toIndexPath:[NSIndexPath indexPathForRow:index1 inSection:0]];
