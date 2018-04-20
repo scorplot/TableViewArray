@@ -57,7 +57,9 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 
-@implementation TableViewProtocolListener
+@implementation TableViewProtocolListener {
+    BOOL _fakeArray;
+}
 +(void)load {
     Method method;
     method = class_getInstanceMethod([UITableView class], @selector(setDelegate:));
@@ -232,19 +234,27 @@ static NSInteger getArrayIndex(NSArray* arr) {
 
 -(id)getObject:(NSIndexPath*)indexPath {
     id object = nil;
-    if (self.listener.subArray) {
-        object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+    if (_fakeArray) {
+        object = _listener.getItem(indexPath.section, indexPath.row);
     } else {
-        object = _dataSource[indexPath.row];
+        if (self.listener.subArray) {
+            object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+        } else {
+            object = _dataSource[indexPath.row];
+        }
     }
     return object;
 }
 -(id)getSection:(NSUInteger)section {
     id object = nil;
-    if (self.listener.subArray) {
-        object = _dataSource[section];
+    if (_fakeArray) {
+        object = _listener.getSection(section);
     } else {
-        object = _dataSource;
+        if (self.listener.subArray) {
+            object = _dataSource[section];
+        } else {
+            object = _dataSource;
+        }
     }
     return object;
 }
@@ -462,10 +472,14 @@ static NSInteger getArrayIndex(NSArray* arr) {
 #pragma mark  require
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.listener.subArray) {
-        return self.listener.subArray(_dataSource, section).count;
+    if (_fakeArray) {
+        return _listener.numberOfRowsInSection(tableView, section);
     } else {
-        return _dataSource.count ;
+        if (self.listener.subArray) {
+            return self.listener.subArray(_dataSource, section).count;
+        } else {
+            return _dataSource.count ;
+        }
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -611,10 +625,14 @@ static NSInteger getArrayIndex(NSArray* arr) {
 
 #pragma mark   optional
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (_listener.subArray) {
-        return _dataSource.count;
+    if (_fakeArray) {
+        return _listener.numberOfSections(tableView);
     } else {
-        return 1;
+        if (_listener.subArray) {
+            return _dataSource.count;
+        } else {
+            return 1;
+        }
     }
 }
 
@@ -627,11 +645,17 @@ static NSInteger getArrayIndex(NSArray* arr) {
 
 -(void)setListener:(TableViewArray *)listener{
     _listener = listener;
-    
     [self checkCircleReference:_listener];
+    _fakeArray = _listener.numberOfSections != nil;
 }
 -(void)checkCircleReference:(TableViewArray*)listener{
+    NSAssert(!checkCircleReference(listener.subArray, listener), @"raise a block circle reference reason: subArray");
+
     /**dataSource*/
+    NSAssert(!checkCircleReference(listener.numberOfSections, listener), @"raise a block circle reference reason: numberOfSections");
+    NSAssert(!checkCircleReference(listener.numberOfRowsInSection, listener), @"raise a block circle reference reason: numberOfRowsInSection");
+    NSAssert(!checkCircleReference(listener.getItem, listener), @"raise a block circle reference reason: getItem");
+    NSAssert(!checkCircleReference(listener.getSection, listener), @"raise a block circle reference reason: getSection");
     NSAssert(!checkCircleReference(listener.cellForRowAtIndexPath, listener), @"raise a block circle reference reason: cellForRowAtIndexPath");
     NSAssert(!checkCircleReference(listener.sectionIndexTitlesForTableView, listener), @"raise a block circle reference reason: sectionIndexTitlesForTableView");
     NSAssert(!checkCircleReference(listener.sectionForSectionIndexTitleAtIndex, listener), @"raise a block circle reference reason: sectionForSectionIndexTitleAtIndex");
@@ -732,20 +756,21 @@ static NSInteger getArrayIndex(NSArray* arr) {
 }
 
 -(void)setDataSource:(NSArray *)dataSource{
-    
-    if (_dataSource!=dataSource) {
-        [self removeObserver];
-    }
-    _dataSource = dataSource;
-    
-    if ([dataSource isKindOfClass:[NSMutableArray class]]) {
-        [self addObserverForDataSource:(NSMutableArray*)self.dataSource];
-        if (_listener.subArray) {
-            for (NSInteger i = 0; i < self.dataSource.count; i++) {
-                NSArray* subArray = _listener.subArray(_dataSource, i);
-                if ([subArray isKindOfClass:[NSMutableArray class]]) {
-                    [self addObserverForDataSource:(NSMutableArray*)subArray];
-                    setArrayIndex(subArray, i);
+    if (!_fakeArray) {
+        if (_dataSource!=dataSource) {
+            [self removeObserver];
+        }
+        _dataSource = dataSource;
+        
+        if ([dataSource isKindOfClass:[NSMutableArray class]]) {
+            [self addObserverForDataSource:(NSMutableArray*)self.dataSource];
+            if (_listener.subArray) {
+                for (NSInteger i = 0; i < self.dataSource.count; i++) {
+                    NSArray* subArray = _listener.subArray(_dataSource, i);
+                    if ([subArray isKindOfClass:[NSMutableArray class]]) {
+                        [self addObserverForDataSource:(NSMutableArray*)subArray];
+                        setArrayIndex(subArray, i);
+                    }
                 }
             }
         }

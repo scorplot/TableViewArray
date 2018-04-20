@@ -15,6 +15,11 @@ typedef NSArray* (^subArray)(NSArray* all, NSInteger index);
 void TableViewConnectArray(UITableView * _Nonnull tableview ,NSArray<NSObject*>* _Nonnull dataSource,TableViewArray * _Nonnull listener);
 
 #pragma mark  - dataSource
+typedef NSInteger (^numberOfSectionsBlock)(UITableView *tableView);
+typedef NSInteger (^numberOfRowsInSectionBlock)(UITableView *tableView, NSInteger section);
+typedef id (^getItemBlock)(NSInteger section, NSInteger row);
+typedef id (^getSectionBlock)(NSInteger section);
+
 typedef UITableViewCell* _Nullable (^cellforRowBlock)(UITableView* _Nullable tableView, NSIndexPath * _Nullable indexPath, id _Nullable object);
 typedef NSArray <NSString*>*_Nullable(^sectionIndexTitlesBlock)(UITableView * _Nullable tableView);
 typedef NSInteger(^sectionForSectionIndexTitleBlock)(UITableView * _Nullable tableView,NSString * _Nullable title,NSInteger index, id _Nullable object);
@@ -112,6 +117,12 @@ typedef void(^cancelPrefetchingForRowsBlock)(UITableView* _Nullable tableView,NS
 @property(nonatomic,copy,nullable) subArray subArray;
 
 #pragma mark  - dataSource
+// conflits with auto lisntener array. If implements these block, the TableView is auto connect with virtul data. can not be listener
+@property(nonatomic,copy,nullable) numberOfSectionsBlock numberOfSections;
+@property(nonatomic,copy,nullable) numberOfRowsInSectionBlock numberOfRowsInSection;
+@property(nonatomic,copy,nullable) getItemBlock getItem;
+@property(nonatomic,copy,nullable) getSectionBlock getSection;
+
 @property(nonatomic,copy,nonnull) cellforRowBlock   cellForRowAtIndexPath;
 @property(nonatomic,copy,nonnull) sectionIndexTitlesBlock  sectionIndexTitlesForTableView;
 @property(nonatomic,copy,nonnull) sectionForSectionIndexTitleBlock  sectionForSectionIndexTitleAtIndex;
