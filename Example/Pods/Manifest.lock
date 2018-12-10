@@ -1,22 +1,34 @@
 PODS:
+  - CCUIModel (0.0.3):
+    - CircleReferenceCheck
   - CircleReferenceCheck (0.0.1)
   - MutableArrayListener (0.1.0):
     - CircleReferenceCheck
-  - TableViewArray (0.1.0):
+  - TableViewArray/Category (0.1.8):
+    - CCUIModel
+  - TableViewArray/TableViewArray (0.1.8):
     - MutableArrayListener
 
 DEPENDENCIES:
-  - TableViewArray (from `../`)
+  - TableViewArray/Category (from `../`)
+  - TableViewArray/TableViewArray (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CCUIModel
+    - CircleReferenceCheck
+    - MutableArrayListener
 
 EXTERNAL SOURCES:
   TableViewArray:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
+  CCUIModel: dc28d65139f5994a7aa583d8a67002409dcdcd09
   CircleReferenceCheck: 5ef0dbaff301108a523f845bf81dfa9a12a83024
   MutableArrayListener: 80566460c0f35ffe89d76a90ebb33adf7f413182
-  TableViewArray: e9dc314569e27cc5c5d1c4d216846c4e16b8b9cb
+  TableViewArray: da187a848e06b045752d634c03fd568dfde198f0
 
-PODFILE CHECKSUM: 67ac081f9d3067e1088c069f1ef3aa59c17170c6
+PODFILE CHECKSUM: 0b2e37206c8f347ed3b25feae6aa4f53dc75afd6
 
-COCOAPODS: 1.4.0.rc.1
+COCOAPODS: 1.5.3

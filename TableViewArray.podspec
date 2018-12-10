@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TableViewArray'
-  s.version          = '0.1.7'
+  s.version          = '0.1.8'
   s.summary          = 'A usefull library make UITableView listener a array'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,17 @@ A usefull library make UITableView listener a array.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'TableViewArray/Classes/**/*'
+  # s.source_files = 'TableViewArray/Classes/**/*'
+  
+  s.subspec 'Category' do |category|
+      category.source_files = 'TableViewArray/Classes/Category/**/*'
+      category.dependency 'CCUIModel'
+  end
+  
+  s.subspec 'TableViewArray' do |tableViewArray|
+      tableViewArray.source_files = 'TableViewArray/Classes/TableViewArray/**/*'
+      tableViewArray.dependency 'MutableArrayListener'
+  end
   
   # s.resource_bundles = {
   #   'TableViewArray' => ['TableViewArray/Assets/*.png']
@@ -38,5 +48,5 @@ A usefull library make UITableView listener a array.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'MutableArrayListener'
+  # s.dependency 'MutableArrayListener'
 end
