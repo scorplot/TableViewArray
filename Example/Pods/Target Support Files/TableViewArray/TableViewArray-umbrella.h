@@ -10,7 +10,7 @@
 #endif
 #endif
 
-#import "UITableView+TableViewArray.h"
+#import "UITableView+CCUIModel.h"
 #import "TableViewArray.h"
 #import "TableViewProtocolListener.h"
 

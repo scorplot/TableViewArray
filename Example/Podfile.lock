@@ -4,9 +4,9 @@ PODS:
   - CircleReferenceCheck (0.0.1)
   - MutableArrayListener (0.1.0):
     - CircleReferenceCheck
-  - TableViewArray/Category (0.1.8):
+  - TableViewArray/Category (0.1.9):
     - CCUIModel
-  - TableViewArray/TableViewArray (0.1.8):
+  - TableViewArray/TableViewArray (0.1.9):
     - MutableArrayListener
 
 DEPENDENCIES:
@@ -27,7 +27,7 @@ SPEC CHECKSUMS:
   CCUIModel: dc28d65139f5994a7aa583d8a67002409dcdcd09
   CircleReferenceCheck: 5ef0dbaff301108a523f845bf81dfa9a12a83024
   MutableArrayListener: 80566460c0f35ffe89d76a90ebb33adf7f413182
-  TableViewArray: da187a848e06b045752d634c03fd568dfde198f0
+  TableViewArray: 17d2575d00c0a32ffbb7f8811e12b2dce1581bac
 
 PODFILE CHECKSUM: 0b2e37206c8f347ed3b25feae6aa4f53dc75afd6
 

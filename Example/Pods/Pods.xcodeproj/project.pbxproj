@@ -7,44 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		007B41559E1A8BCCA896CAC14F3C84EF /* TableViewProtocolListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DFEA6C5251F2010E0B05E903B5050C /* TableViewProtocolListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06A6BC46AA7CFB9AD923F5D3E056371A /* CCUIModel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DE486C11C67B08E41861DA9DBC3AF89A /* CCUIModel-dummy.m */; };
 		0BD77482221D438DE9FB3947A9602559 /* Pods-TableViewArray_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9323D95717A9DF6BD6686533D0410941 /* Pods-TableViewArray_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		28C6745F57E27F1A0E467F52F3C9D13A /* TableViewProtocolListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B89138447F1BA4D4A6B2F1AD8E0B45B /* TableViewProtocolListener.m */; };
 		3C8BF40E9DE6B8E0F28B0998E34D0B97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED9424411F43A49A1AA58162644069 /* Foundation.framework */; };
 		40246ED6558569A563DA4215C41D5F94 /* NSMutableArrayListenerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 631BFFCEB5AB0EA7B6EB762D13ED8EF7 /* NSMutableArrayListenerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		426EB33367A1C0D681C97DC2928B316A /* CircleReferenceCheck-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D6277B036D21B947DD36907EB0A90 /* CircleReferenceCheck-dummy.m */; };
-		43BD3D47EC9E7B395A1B0D28694A5949 /* TableViewArray.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A66E16A7CBB6806C05A4337DD489E2 /* TableViewArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45641647D9EB06F19BF2E6ADF7F666A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED9424411F43A49A1AA58162644069 /* Foundation.framework */; };
 		5502A45168CE0260A5BD48DD9E547A7B /* NSMutableArray+Listener.h in Headers */ = {isa = PBXBuildFile; fileRef = 3083455D1A24F1B3D370BF3D6DDB84E1 /* NSMutableArray+Listener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		56B7D6EF484A46099C37633937BF0FDF /* TableViewArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CED276E730D5062C8BDDE6DEDBCAAF /* TableViewArray.m */; };
 		5A6748D1E7F3E0675D67B8E6BAEDB97A /* MutableArrayListener-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA22FE9098BCE8FA5BC1211A09D7ADA0 /* MutableArrayListener-dummy.m */; };
 		5DE3B66C1AA7E6FE8422DBE3D85BBE32 /* MutableArrayListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1BAF399FBAE1CF4B568B9291E857EB /* MutableArrayListener.m */; };
 		6212172F09A9BC505048F9A85F42F6F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED9424411F43A49A1AA58162644069 /* Foundation.framework */; };
-		623EF744D4A53CC6F9D0AEFFFACD4726 /* TableViewArray-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B81D993538735957BF911BC51D1DC6 /* TableViewArray-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6996DB8F9EF44141918CE646E0C502EF /* CircleReferenceCheck-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C784D6627D49758E64EE232B85153F48 /* CircleReferenceCheck-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A48DDDF08F86BB7E432CFECFD0E3770 /* CCUIModel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2297682FCF82E8CB91029776A0462946 /* CCUIModel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EDCC1C61B53910197648519B1BE7522 /* CircleReferenceCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F1A78D416776508CBFC52F1A6A9918 /* CircleReferenceCheck.framework */; };
 		6F595AB66D583D3338F82A49DCE4BE30 /* MutableArrayListener-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F6404B4E95708FC5DF58C034A5F3B7EA /* MutableArrayListener-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71EE9E3D9C3E8A8A1DD872A07D45F4F4 /* CircleReferenceCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F1A78D416776508CBFC52F1A6A9918 /* CircleReferenceCheck.framework */; };
 		7372CEFF27DD1CF869AD0FEC85A75168 /* Pods-TableViewArray_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 617FFFF337DE218DB847740003DCBA55 /* Pods-TableViewArray_Tests-dummy.m */; };
+		75532324843547AA1BF66A9AD15EB225 /* TableViewProtocolListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B89138447F1BA4D4A6B2F1AD8E0B45B /* TableViewProtocolListener.m */; };
+		7681E62E50F3CAABDD82901A32FBF3FB /* TableViewArray-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7705A3D0AB3AE1FA5C4F358A789DAE /* TableViewArray-dummy.m */; };
+		799B00F333145AE3D3C5BBEF50E16ED3 /* TableViewArray-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B81D993538735957BF911BC51D1DC6 /* TableViewArray-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8FC52A4E200F345EED9238FB0A819839 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED9424411F43A49A1AA58162644069 /* Foundation.framework */; };
-		911C7836299E9585A3608C1D8A4436A2 /* TableViewArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CED276E730D5062C8BDDE6DEDBCAAF /* TableViewArray.m */; };
 		91AAFFF298BA8719A21652BCD446C6FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED9424411F43A49A1AA58162644069 /* Foundation.framework */; };
+		95DC064ABFDC1A03BBA791A48523C131 /* UITableView+CCUIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 208AFC23803F27ECAC4971DDDAF64F48 /* UITableView+CCUIModel.m */; };
 		9755DA143F3DEB4CF56021F4A5556CDA /* CircleReferenceCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F1A78D416776508CBFC52F1A6A9918 /* CircleReferenceCheck.framework */; };
-		97AE140C4A6C39EFC8D853DBB57CFED7 /* UITableView+TableViewArray.h in Headers */ = {isa = PBXBuildFile; fileRef = CD493C6704F6A76268F61CC510ED74F0 /* UITableView+TableViewArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A02D0AC9F2A31BC029AE64C6FB70BE0C /* MutableArrayListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5C691A9535FB9ECA10812692EDC836 /* MutableArrayListener.framework */; };
 		A9C1D202D3BACBD617764E621B956C25 /* CCUIModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C38667B88B618101BF51495DF28ACB2 /* CCUIModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB2C8B635ABCF84E6C5CE813F4C8773D /* Pods-TableViewArray_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DB421CDFA45C2935D0C701B8175D8904 /* Pods-TableViewArray_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB9573236E2489B33B5A086E4EFC53B /* NSMutableArray+Listener.m in Sources */ = {isa = PBXBuildFile; fileRef = 4866515EA9DA06C83D217C93E4D33054 /* NSMutableArray+Listener.m */; };
-		AE53CAF45C4EC981D1CFB7D8F5902749 /* UITableView+TableViewArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 38556F1687AD4BF482AF0A0C76581497 /* UITableView+TableViewArray.m */; };
 		B74386DCB0623E84B12906B399CBC1F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BED9424411F43A49A1AA58162644069 /* Foundation.framework */; };
+		BA11568FE427ADD84B7BED7B3B958742 /* UITableView+CCUIModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 772D8630B74613C5B4AA2C16AEF7962D /* UITableView+CCUIModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB1E9CDFA38237A6B8BB4AD633643284 /* Pods-TableViewArray_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98DD9E88E1AA0C73E7B35F668783E9BE /* Pods-TableViewArray_Example-dummy.m */; };
 		D4FE2193D3870F662F9E0B90B1A5CCAF /* CCUIModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2536E86111BB5071FC94E212595A5E0E /* CCUIModel.framework */; };
 		D9A736A6771375071705F75E8AD88019 /* CCUIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 075DE8270E903CB9F188C07B6BD77CAF /* CCUIModel.m */; };
 		E12B50D56D694FE507B0C785C385AAF0 /* CircleReferenceCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 354747B3C432963EEE89B3307E9494F4 /* CircleReferenceCheck.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		E9A31B10830A4F79A58B71CDFAB7FB38 /* TableViewArray-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7705A3D0AB3AE1FA5C4F358A789DAE /* TableViewArray-dummy.m */; };
 		EA486960B1E98BEB15E825485F5CEB20 /* CircleReferenceCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = E5279B79618EE2C47C9983F88D62D076 /* CircleReferenceCheck.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5235CC37D252AA6E8855DC4F7DBCE84 /* TableViewArray.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A66E16A7CBB6806C05A4337DD489E2 /* TableViewArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCEC5E8AB151CB2089A81E89B0611AD5 /* MutableArrayListener.h in Headers */ = {isa = PBXBuildFile; fileRef = DD5D8811E0EE77DA31940D4DEEEC821D /* MutableArrayListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE09C60814A8D9CB76E3A8A2064894DE /* TableViewProtocolListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 43DFEA6C5251F2010E0B05E903B5050C /* TableViewProtocolListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +130,7 @@
 		0DD67CF759D2896C8D9F6D7B2E052415 /* Pods-TableViewArray_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TableViewArray_Example-resources.sh"; sourceTree = "<group>"; };
 		0E64EFB33287C64BB7DBE44A1F2DACA4 /* MutableArrayListener.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MutableArrayListener.framework; path = MutableArrayListener.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1AE496B7BEEE40501ECE93BC6D892 /* MutableArrayListener.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MutableArrayListener.modulemap; sourceTree = "<group>"; };
+		208AFC23803F27ECAC4971DDDAF64F48 /* UITableView+CCUIModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableView+CCUIModel.m"; path = "TableViewArray/Classes/Category/UITableView+CCUIModel.m"; sourceTree = "<group>"; };
 		21A7BC39A10FC3B3B44F09228E7DC3F9 /* TableViewArray.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TableViewArray.xcconfig; sourceTree = "<group>"; };
 		2297682FCF82E8CB91029776A0462946 /* CCUIModel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CCUIModel-umbrella.h"; sourceTree = "<group>"; };
 		2536E86111BB5071FC94E212595A5E0E /* CCUIModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CCUIModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +141,6 @@
 		3083455D1A24F1B3D370BF3D6DDB84E1 /* NSMutableArray+Listener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Listener.h"; path = "MutableArrayListener/Classes/NSMutableArray+Listener.h"; sourceTree = "<group>"; };
 		354747B3C432963EEE89B3307E9494F4 /* CircleReferenceCheck.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CircleReferenceCheck.m; path = CircleReferenceCheck/Classes/CircleReferenceCheck.m; sourceTree = "<group>"; };
 		37ECDE68E5F5B0C256336ABBFB637406 /* CCUIModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CCUIModel.framework; path = CCUIModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		38556F1687AD4BF482AF0A0C76581497 /* UITableView+TableViewArray.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableView+TableViewArray.m"; path = "TableViewArray/Classes/Category/UITableView+TableViewArray.m"; sourceTree = "<group>"; };
 		38F1A78D416776508CBFC52F1A6A9918 /* CircleReferenceCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CircleReferenceCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D56E3D34C449D6AA2A431701F7DA25F /* Pods-TableViewArray_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TableViewArray_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		43DFEA6C5251F2010E0B05E903B5050C /* TableViewProtocolListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TableViewProtocolListener.h; path = TableViewArray/Classes/TableViewArray/TableViewProtocolListener.h; sourceTree = "<group>"; };
@@ -158,6 +158,7 @@
 		640DB19A1422AF118C09A20DC29220DB /* Pods-TableViewArray_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TableViewArray_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6B89138447F1BA4D4A6B2F1AD8E0B45B /* TableViewProtocolListener.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TableViewProtocolListener.m; path = TableViewArray/Classes/TableViewArray/TableViewProtocolListener.m; sourceTree = "<group>"; };
 		6FCA5FF47FEE15CBC727BCA8F27C3157 /* Pods-TableViewArray_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TableViewArray_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		772D8630B74613C5B4AA2C16AEF7962D /* UITableView+CCUIModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+CCUIModel.h"; path = "TableViewArray/Classes/Category/UITableView+CCUIModel.h"; sourceTree = "<group>"; };
 		7A1FC80970CA8E0991AEF723A84C7B94 /* TableViewArray.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TableViewArray.modulemap; sourceTree = "<group>"; };
 		7BED9424411F43A49A1AA58162644069 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7ED9AD91FA442DE004D0DB11FE59FEDA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		C8D1504DBE36F75006C9F886958B60F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9E4E6F45BCE1AC853F2E39F2490697C /* Pods-TableViewArray_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TableViewArray_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB252323A7CD214245D959375CA27353 /* Pods-TableViewArray_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TableViewArray_Example.modulemap"; sourceTree = "<group>"; };
-		CD493C6704F6A76268F61CC510ED74F0 /* UITableView+TableViewArray.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableView+TableViewArray.h"; path = "TableViewArray/Classes/Category/UITableView+TableViewArray.h"; sourceTree = "<group>"; };
 		D340B5E12186500A8C38E3C759D934BE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5CED276E730D5062C8BDDE6DEDBCAAF /* TableViewArray.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TableViewArray.m; path = TableViewArray/Classes/TableViewArray/TableViewArray.m; sourceTree = "<group>"; };
 		D92BBBA09908B575AA176E0945A8EE93 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -259,6 +259,15 @@
 				7BED9424411F43A49A1AA58162644069 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		18F9B15B65FBB48448574824838BFD9C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				772D8630B74613C5B4AA2C16AEF7962D /* UITableView+CCUIModel.h */,
+				208AFC23803F27ECAC4971DDDAF64F48 /* UITableView+CCUIModel.m */,
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 		250154AD165D57EBD23322E0BBE42761 /* CCUIModel */ = {
@@ -445,15 +454,6 @@
 			path = "Target Support Files/Pods-TableViewArray_Tests";
 			sourceTree = "<group>";
 		};
-		E8DDD6DF715CEDC352F1D062C2A69C00 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				CD493C6704F6A76268F61CC510ED74F0 /* UITableView+TableViewArray.h */,
-				38556F1687AD4BF482AF0A0C76581497 /* UITableView+TableViewArray.m */,
-			);
-			name = Category;
-			sourceTree = "<group>";
-		};
 		EB233949978B1557D26EC3780DCE0AD4 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,7 +485,7 @@
 		FB948F6BB50B59067B0FD5A261F37BE7 /* TableViewArray */ = {
 			isa = PBXGroup;
 			children = (
-				E8DDD6DF715CEDC352F1D062C2A69C00 /* Category */,
+				18F9B15B65FBB48448574824838BFD9C /* Category */,
 				34A23E4943A12DA60087CE55346499F9 /* Pod */,
 				7197CFBB386EBE25AFB0877D44309788 /* Support Files */,
 				872EAE6587CDF471810F15E512A61AE6 /* TableViewArray */,
@@ -502,6 +502,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2C8B635ABCF84E6C5CE813F4C8773D /* Pods-TableViewArray_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		828FFFD1890E0BF221C14E636CF367FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				799B00F333145AE3D3C5BBEF50E16ED3 /* TableViewArray-umbrella.h in Headers */,
+				F5235CC37D252AA6E8855DC4F7DBCE84 /* TableViewArray.h in Headers */,
+				FE09C60814A8D9CB76E3A8A2064894DE /* TableViewProtocolListener.h in Headers */,
+				BA11568FE427ADD84B7BED7B3B958742 /* UITableView+CCUIModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,17 +553,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EECD536B97C8C2DA05942D7A600E7D50 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				623EF744D4A53CC6F9D0AEFFFACD4726 /* TableViewArray-umbrella.h in Headers */,
-				43BD3D47EC9E7B395A1B0D28694A5949 /* TableViewArray.h in Headers */,
-				007B41559E1A8BCCA896CAC14F3C84EF /* TableViewProtocolListener.h in Headers */,
-				97AE140C4A6C39EFC8D853DBB57CFED7 /* UITableView+TableViewArray.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -560,9 +560,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38FD80973046DBB4A9EB371786D8D7EB /* Build configuration list for PBXNativeTarget "TableViewArray" */;
 			buildPhases = (
-				E6D5B0FACB8998A408C2B9EDEB0AA700 /* Sources */,
+				F421FC1634D6CEDE55B596CB75BF55FA /* Sources */,
 				BEE4600E58393C70E1B83D95F52F17A4 /* Frameworks */,
-				EECD536B97C8C2DA05942D7A600E7D50 /* Headers */,
+				828FFFD1890E0BF221C14E636CF367FC /* Headers */,
 			);
 			buildRules = (
 			);
@@ -744,14 +744,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6D5B0FACB8998A408C2B9EDEB0AA700 /* Sources */ = {
+		F421FC1634D6CEDE55B596CB75BF55FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9A31B10830A4F79A58B71CDFAB7FB38 /* TableViewArray-dummy.m in Sources */,
-				911C7836299E9585A3608C1D8A4436A2 /* TableViewArray.m in Sources */,
-				28C6745F57E27F1A0E467F52F3C9D13A /* TableViewProtocolListener.m in Sources */,
-				AE53CAF45C4EC981D1CFB7D8F5902749 /* UITableView+TableViewArray.m in Sources */,
+				7681E62E50F3CAABDD82901A32FBF3FB /* TableViewArray-dummy.m in Sources */,
+				56B7D6EF484A46099C37633937BF0FDF /* TableViewArray.m in Sources */,
+				75532324843547AA1BF66A9AD15EB225 /* TableViewProtocolListener.m in Sources */,
+				95DC064ABFDC1A03BBA791A48523C131 /* UITableView+CCUIModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

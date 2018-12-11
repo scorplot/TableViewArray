@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITableView (TableViewArray)
+@interface UITableView (CCUIModel)
 
 @end
