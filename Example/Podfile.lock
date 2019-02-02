@@ -1,5 +1,5 @@
 PODS:
-  - CCUIModel (0.0.3):
+  - CCUIModel (0.0.8):
     - CircleReferenceCheck
   - CircleReferenceCheck (0.0.1)
   - MutableArrayListener (0.1.0):
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CCUIModel: dc28d65139f5994a7aa583d8a67002409dcdcd09
+  CCUIModel: aed70150602c6376cb526660bce2d5830cfbb3cc
   CircleReferenceCheck: 5ef0dbaff301108a523f845bf81dfa9a12a83024
   MutableArrayListener: 80566460c0f35ffe89d76a90ebb33adf7f413182
   TableViewArray: 17d2575d00c0a32ffbb7f8811e12b2dce1581bac
