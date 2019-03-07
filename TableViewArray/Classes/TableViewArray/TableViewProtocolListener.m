@@ -19,6 +19,8 @@
 @property(nonatomic,weak)id<UITableViewDelegate>delegate;
 @end
 
+static const void* __keyMiddle;
+
 typedef void (*setDelegate_IMP)(id self,SEL _cmd ,id delegate);
 static setDelegate_IMP origin_setDelegate_IMP = nil;
 static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
@@ -27,15 +29,12 @@ static void replace_setDelegate_IMP(id self,SEL _cmd ,id delegate){
             origin_setDelegate_IMP(self, _cmd, delegate);
             return;
         }
-        id<UITableViewDelegate> tableDelegate = [self delegate];
-        if ([delegate isKindOfClass:[TableViewProtocolListener class]]) {
-            [(TableViewProtocolListener*)delegate setDelegate:tableDelegate];
+        
+        TableViewProtocolListener* middle = objc_getAssociatedObject(self, &__keyMiddle);
+        if (delegate == middle) {
             origin_setDelegate_IMP(self, _cmd, delegate);
-        } else if ([tableDelegate isKindOfClass:[TableViewProtocolListener class]]) {
-            [(TableViewProtocolListener*)tableDelegate setDelegate:delegate];
-            if (delegate == nil) {
-                origin_setDelegate_IMP(self, _cmd, nil);
-            }
+        } else if (middle) {
+            middle.delegate = delegate;
         } else {
             origin_setDelegate_IMP(self, _cmd, delegate);
         }
@@ -68,6 +67,18 @@ static NSInteger getArrayIndex(NSArray* arr) {
 
 -(void)dealloc {
     
+}
+
+- (void)setTableView:(UITableView *)tableView {
+    _tableView = tableView;
+    [self setAsMiddle:tableView];
+}
+
+- (void)setAsMiddle:(UITableView*)tableView {
+    TableViewProtocolListener* oldMiddle = objc_getAssociatedObject(tableView, &__keyMiddle);
+    self.delegate = oldMiddle.delegate;
+    objc_setAssociatedObject(tableView, &__keyMiddle, self, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    tableView.delegate = self;
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {

@@ -25,7 +25,6 @@ void TableViewConnectArray(UITableView* _Nullable tableview ,NSArray<NSObject*>*
     protocalListener.dataSource= dataSource;
     protocalListener.tableView = tableview;
     tableview.dataSource= protocalListener;
-    tableview.delegate= protocalListener;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0) {
         if (@available(iOS 10.0, *)) {
             tableview.prefetchDataSource=protocalListener;
@@ -33,8 +32,6 @@ void TableViewConnectArray(UITableView* _Nullable tableview ,NSArray<NSObject*>*
             // Fallback on earlier versions
         }
      }
-    static const void* key;
-    objc_setAssociatedObject(tableview, &key, protocalListener, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [tableview reloadData];
 }
 
