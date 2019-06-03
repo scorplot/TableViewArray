@@ -10,15 +10,15 @@
 @class TableViewArray;
 
 #pragma mark  - the picker of array
-typedef NSArray* (^subArray)(NSArray* all, NSInteger index);
+typedef NSArray* _Nullable (^subArray)(NSArray* _Nullable all, NSInteger index);
 
 void TableViewConnectArray(UITableView * _Nullable tableview ,NSArray<NSObject*>* _Nullable dataSource,TableViewArray * _Nullable listener);
 
 #pragma mark  - dataSource
-typedef NSInteger (^numberOfSectionsBlock)(UITableView *tableView);
-typedef NSInteger (^numberOfRowsInSectionBlock)(UITableView *tableView, NSInteger section);
-typedef id (^getItemBlock)(NSInteger section, NSInteger row);
-typedef id (^getSectionBlock)(NSInteger section);
+typedef NSInteger (^numberOfSectionsBlock)(UITableView * _Nullable tableView);
+typedef NSInteger (^numberOfRowsInSectionBlock)(UITableView * _Nullable tableView, NSInteger section);
+typedef _Nullable id (^getItemBlock)(NSInteger section, NSInteger row);
+typedef _Nullable id (^getSectionBlock)(NSInteger section);
 
 typedef UITableViewCell* _Nullable (^cellforRowBlock)(UITableView* _Nullable tableView, NSIndexPath * _Nullable indexPath, id _Nullable object);
 typedef NSArray <NSString*>*_Nullable(^sectionIndexTitlesBlock)(UITableView * _Nullable tableView);
@@ -223,9 +223,9 @@ typedef void(^cancelPrefetchingForRowsBlock)(UITableView* _Nullable tableView,NS
 
 @interface UITableView (TableViewArray)
 
-@property (nonatomic, strong) TableViewArray *tv_tableViewArray;
+@property (nonatomic, strong) TableViewArray *_Nullable tv_tableViewArray;
 
-@property (nonatomic, strong) NSArray<NSObject*> *tv_dataSource;
+@property (nonatomic, strong) NSArray<NSObject*> *_Nullable tv_dataSource;
 
 @end
 
