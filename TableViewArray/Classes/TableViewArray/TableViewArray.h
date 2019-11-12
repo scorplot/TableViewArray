@@ -115,6 +115,7 @@ typedef void(^cancelPrefetchingForRowsBlock)(UITableView* _Nullable tableView,NS
 
 @interface TableViewArray : NSObject
 @property(nonatomic, assign) BOOL disableAnimation;
+@property(nonatomic, assign) BOOL reverse; // 逆序数组
 @property(nonatomic,copy,nullable) subArray subArray;
 
 #pragma mark  - dataSource

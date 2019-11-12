@@ -58,6 +58,7 @@ static NSInteger getArrayIndex(NSArray* arr) {
 
 @implementation TableViewProtocolListener {
     BOOL _fakeArray;
+    BOOL _isReverse;
 }
 +(void)load {
     Method method;
@@ -250,6 +251,8 @@ static NSInteger getArrayIndex(NSArray* arr) {
     } else {
         if (self.listener.subArray) {
             object = self.listener.subArray(_dataSource, indexPath.section)[indexPath.row];
+        } else if (_isReverse) {
+            object = _dataSource[_dataSource.count - indexPath.row - 1];
         } else {
             object = _dataSource[indexPath.row];
         }
@@ -658,6 +661,7 @@ static NSInteger getArrayIndex(NSArray* arr) {
     _listener = listener;
     [self checkCircleReference:_listener];
     _fakeArray = _listener.numberOfSections != nil;
+    _isReverse = _listener.reverse;
 }
 -(void)checkCircleReference:(TableViewArray*)listener{
     NSAssert(!checkCircleReference(listener.subArray, listener), @"raise a block circle reference reason: subArray");
@@ -788,13 +792,25 @@ static NSInteger getArrayIndex(NSArray* arr) {
     }
 }
 
+static NSIndexSet *reverseIndexPath(NSIndexSet *indexes, NSInteger count) {
+    NSMutableIndexSet *set = [[NSMutableIndexSet alloc] init];
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        [set addIndex:count-idx-1];
+    }];
+    return set;
+}
+
 -(void)addObserverForDataSource:(NSMutableArray * )array{
     BOOL isGroup = _listener.subArray != nil;
     typeof(self)__weak weakself = self;
     typeof(_listener.subArray)__weak weakSubArray = _listener.subArray;
+    BOOL isReverse = _listener.reverse;
 
     MutableArrayListener *observer = [[MutableArrayListener alloc]init];
     observer.didAddObjects = ^(NSMutableArray *array, NSArray *objects, NSIndexSet *indexes) {
+        if (isReverse) {
+            indexes = reverseIndexPath(indexes, array.count);
+        }
         if (array==weakself.dataSource) {
             if (isGroup) {
                 if (weakself.listener.disableAnimation) {
@@ -837,6 +853,9 @@ static NSInteger getArrayIndex(NSArray* arr) {
         }
     };
     observer.didDeleteObjects = ^(NSMutableArray *array, NSArray *objects, NSIndexSet *indexes) {
+        if (isReverse) {
+            indexes = reverseIndexPath(indexes, array.count);
+        }
 //        [weakself.tableView beginUpdates];
         if (array==weakself.dataSource) {
             if (isGroup) {
@@ -877,6 +896,11 @@ static NSInteger getArrayIndex(NSArray* arr) {
 //        [weakself.tableView endUpdates];
     };
     observer.didExchangeIndex = ^(NSMutableArray *array, NSUInteger index1, NSUInteger index2) {
+        if (isReverse) {
+            NSInteger count = array.count;
+            index1 = count - index1 - 1;
+            index2 = count - index2 - 1;
+        }
 //        [weakself.tableView beginUpdates];
         if (array==weakself.dataSource) {
             if (isGroup) {
@@ -902,6 +926,11 @@ static NSInteger getArrayIndex(NSArray* arr) {
 //        [weakself.tableView endUpdates];
     };
     observer.didReplaceObject = ^(NSMutableArray *array, id anObject, id withObject, NSUInteger index) {
+        if (isReverse) {
+            NSInteger count = array.count;
+            index = count - index - 1;
+        }
+
         if (array==weakself.dataSource) {
             if (isGroup) {
                 [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationNone];
